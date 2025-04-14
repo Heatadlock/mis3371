@@ -15,13 +15,13 @@
             <!--Header-->
             <Header>
                 <div class="logo-text">
-                    <img scr="./Brigid_H.jpeg" height="120px" alt="Brigid Health Logo" class="logo">
+                    <img scr="brigid_health.png" height="120px" alt="Brigid Health Logo" class="logo">
                     <h2>Brigid Health</h2>
                 </div>
                 <p id="datetime" align="center"></p>
             </Header>
                 
-            <form name="medical-information" id="form" class="form-section">
+            <form name="medical-information" id="form" class="form-section" onsubmit="return handleSubmit()">
             <p1>Please fill out the following information</p1>
                 <br><br>
                 <!--Their Name-->
@@ -53,17 +53,18 @@
                 <br><br>
                 <!--Address-->
                     <label for="address1">Address Line 1:</label> <!--an XML list for extra credit-->
-                    <input type="text" id="address1" name="address1" minlength="2" maxlength="30"
+                    <input type="text" id="address" name="address1" minlength="2" maxlength="30"
                         required title="Please enter your address" placeholder="#####" onblur="vaildateAddress1()">
-                    <span class="error" id="address1-error"></span>
+                    <span class="error" id="address-error"></span>
                 <br><br>
                     <label for="address1">Address Line 2:</label>
-                    <input type="text" id="address1" name="address2" minlength="2" maxlength="30"
-                        placeholder="#####" onblur="vaildateAddress1()">
-                    <span class="error" id="address2-error"></span>
+                    <input type="text" id="address" name="address2" minlength="2" maxlength="30"
+                        placeholder="#####" onblur="vaildateAddress()">
+                    <span class="error" id="address-error"></span>
                 <br>
                     <label for="city">City:</label>
-                    <input type="text" id="city" name="city" pattern="{1,30}" required>
+                    <input type="text" id="city" name="city" pattern="[A-Za-z]{1,30}" required onblur="validateCity()">
+                    <span class="error" id="city-error"></span>
                     <label for="state">State:</label>
                     <select id="states" name="states"> <!--SelectList is Copied from the web as listed in assignment-->
                         <option value="">{Choose Your State}</option>
@@ -180,7 +181,9 @@
                 <br><br>
                     <!--Set User/Pass-->
                     <label for="userID">Desired User ID:</label>
-                    <input type="text" id="userID" name="userID" pattern="{1,20}" required>
+                    <input type="text" id="userID" name="userID" pattern="{1,30}" required
+                        onblur="validateUserID()">
+                    <span class="error" id="userID-error"></span>
                 <br>
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" pattern="{8,20}" placeholder="********"
@@ -190,12 +193,24 @@
                     <label for="confirmPassword">Re-enter Password:</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" pattern="{8,20}" 
                         placeholder="********" required onblur="validateConfirmPassword()" oninput="validateConfirmPassword()" onfocus="validateConfirmPassword()">
-                    <span class="error" id="confirmPassword-error"></span> <!--isnt validated-->
+                    <span class="error" id="confirmPassword-error"></span>
                 <br><br>
-                    <!--End-->
-                    <input type="submit" value="Submit"> <!--needs to be dynamic thoughout-->
-                    <input type="reset" value="CLEAR AND START OVER">
-                
+                    <!--Buttons-->
+                    <!-- Review Button -->
+                    <input type="button" id="review" value="Review" onclick="reviewInput()">
+                    
+                    <!-- Validate Button -->
+                    <input type="button" id="validate" value="Validate" onclick="validateEverything()">
+                    
+                    <!-- Submit Button -->
+                    <input type="submit" id="submit" value="Submit">
+                    
+                    <!-- Reset Button -->
+                    <input type="reset" value="Clear and Restart">
+                </div>
+                <center>
+                    <p id="showInput"></p>
+                </center>
             </form>
             <!--Footer-->
             <div class="footer">
